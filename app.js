@@ -14,6 +14,10 @@ const listings =[
     occupation: 'Gymnist',
     price: 24}
 ]
+listings.forEach(i =>{
+  const html = `<div class="flex"><p>${i.name}</p><p>${i.occupation}</p><p>$${i.price}</p></div>`;
+  list.innerHTML += html;
+})
 
 function randomListing(){
   const namesIdx = Math.floor(Math.random()*names.length);
@@ -25,15 +29,19 @@ function randomListing(){
   };
   return listing;
 }
+function getAvg(listng){
+  let avg = listings.reduce((accum,current)=>{
+    return accum + current.price;
+  },0);
+  avg = (avg / listings.length).toFixed(2);
+  return avg;
+}
 
 function render(listng){
 
   const html = `<div class="flex"><p>${listng.name}</p><p>${listng.occupation}</p><p>$${listng.price}</p></div>`;
   list.innerHTML += html;
-  let avg = listings.reduce((accum,current)=>{
-      return accum + current.price;
-  },0);
-  avg = (avg / listings.length).toFixed(2);
+  avg = getAvg();
   avgprice.innerHTML = `The average staring price is $${avg}`;
 }
 
